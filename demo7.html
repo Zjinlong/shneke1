@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0；
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        
+    </div>
+    <div id="root">
+        <one :message="t"></one>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component("one", {
+
+            template: "<p>{{message}}</p>",
+            props: {
+                //类型检测
+                // message:[String,Number]
+
+                message: {
+                    type: String,
+                    //必须有值
+                    required: true,
+                    //默认值
+                    default: function() {
+                        let b = "哈哈" + "哼哼"
+                        return b
+                    },
+                    //自定义验证函数
+                    validator: function(v) {
+                        //接受的属性值长度必须大于6
+                        return v.length > 6
+                    }
+                }
+            }
+
+        })
+
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                t: '哈哈哼哼哼哼和哥哥好'
+            }
+
+
+        })
+    </script>
+
+</body>
+
+</html>

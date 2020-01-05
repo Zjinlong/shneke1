@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>SPA</title>
+		<style>
+        
+        #color1{
+        	width: 200px;
+        	height: 30px;
+        	border: 2px solid red;
+
+        }
+        .class2{
+        	border: 2px dotted purple;
+        }
+        .d1{
+
+        	width: 100px;
+        	height: 100px;
+        	background-color: blue;
+        }
+		</style>
+	</head>
+	
+	<body>
+		<script src="vue.min.js"></script>
+        <div id="root">
+
+         <h1>{{tit}}</h1>
+         <p>{{txt}}</p>
+
+         <p>{{showTxt()}}</p>
+          <h2>指令</h2>
+          <h3>v- 命名空间</h3>
+         <p v-html="message"></p>
+         
+         <p v-bind:id="p1">v-bind:id 绑定id </p>
+
+         <p v-bind:class="p2">v-bind:class 绑定class  </p>
+
+         <!-- <img v-bind:src="imgs"> -->
+
+
+         选我显示样式<input v-model="inp1"  type="checkbox"/>
+        
+         <div v-bind:class="{'d1':inp1}">是否使用样式</div>
+
+         <div :class="{'d1':inp1}">v-bind简写</div>
+
+        <p v-on:click="sayHello">点我弹框</p>
+        
+        <p @click="sayHello">v-on 简写</p>
+
+        <h2>修饰符</h2>
+
+        <p @click.prevent="sayHello">阻止默认事件prevent </p>
+
+        <p @click.stop="sayHello">取消冒泡</p>
+
+
+        <h2>显示隐藏</h2>
+
+        <p v-show="isShow">是否显示</p>
+
+        <p v-if="isCre">是否创建</p>
+
+        <h2>v-for 循环</h2>
+        <div v-for="v in arr">
+          <p>{{v}}</p>
+        </div>
+
+
+        <div v-for="item in obj">
+          <p>{{item.name}}</p>
+          <p>{{item.age}}</p>
+        </div>
+
+
+
+        <h2>过滤器</h2>
+
+        <p>{{content | upperCase}}</p>
+
+        <p>{{price | currency("¥")|upperCase}}</p>
+
+        <p>{{price | currency("$")}}</p>
+
+        <p>{{price | currency("支出:")}}</p>
+
+        <p v-bind:name="pTxt | typep"></p>
+
+
+       
+
+      输入姓名<input type="text" v-model="xm"> 
+
+       <ul v-for="item in arr2"> 
+       <li>{{item}}</li>
+       </ul>
+       <button @click="adduser">添加</button>
+
+       
+
+
+
+        </div>
+
+   
+        <script>
+        var data = { tit:"vue应用",
+                     txt:"我的第一个vue案例",
+                     message:"<b>我的第一个html元素</b><i>斜体字</i>",
+                     p1:"color1",
+                     p2:"class2",
+                     inp1:false,
+                     imgs:"",
+                     isShow:true,
+                     isCre:false,
+                     content:"my name is xiangyang",
+                     price:200,
+                     pTxt:"ppp",
+                     arr:[10,20,30,40,50],
+                     obj:[{name:"张三",age:20},{name:"李四",age:25},{name:"小红",age:22}],
+                     xm:"",
+                     name:"",
+                     arr2:[] 
+     }
+
+        var vm = new Vue({
+          el:"#root",
+          data:data,
+          methods:{
+          //方法	
+           showTxt:function(){
+
+           	 return "我的第一个方法"
+           },
+
+           sayHello:function(){
+
+           	alert("你好")
+           },
+
+           adduser:()=>{
+
+              // this.data.name = this.data.xm;
+
+              this.data.arr2.push(this.data.xm)
+           }
+
+          },
+          //过滤器
+          filters:{
+           upperCase:function(v){
+
+               if(v){
+                return v.toUpperCase();
+               }else{
+                return "内容为空"
+               }
+           },
+           currency:function(v,t){
+
+              if(v){
+                return t+v
+              }else{
+                return "$0"
+              }
+
+           },
+           typep:function(v){
+              
+              if(v){
+                // console.log(v.charAt(0).toUpperCase() + v.slice(1))
+                //首字母大写
+                return  v.charAt(0).toUpperCase() + v.slice(1);
+              }
+
+           }
+
+
+          }
+
+        })
+
+     //通过vue实例获取data中的属性 或者 methods中的方法
+     console.log(vm.showTxt())
+
+     // console.log(data.tit)
+
+     //设置属性 会影响到原始数据 自动更新显示内容
+     vm.txt = "今天很高兴";
+
+
+
+     
+
+
+
+
+
+     
+
+       
+
+
+        </script>
+	</body>
+</html>

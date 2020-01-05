@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#wrap{
+				border: 1px solid #ccc;
+				width: 400px;
+				margin: 10px auto;
+				background-color: #eee;
+				font-size: 20px; 
+				padding: 10px;
+			}
+			#txtTitle{
+				width: 330px;
+				height: 25px;
+				font-size: 20px;
+			}
+			#txtContent{
+				width: 320px;
+				height: 150px;
+				padding: 5px;
+				margin-top: 10px;
+				font-size: 20px;
+				resize: none;
+			}
+			#btn{
+				width: 80px;
+				height: 30px;
+				border:none;
+				margin-top: 10px;
+				margin-left: 50px;
+			}
+			h3{
+				margin-top: 10px;
+			}
+			#ul1{
+				list-style: none;
+				margin-top: 15px;
+			}
+			#ul1 .p1{
+				background-color: #ccc;
+				height: 40px;
+				width: 395px;
+				line-height: 40px;
+				border-bottom: 1px solid #666;
+			} 
+			#ul1 .p2{
+				width: 395px;
+				/*height: 40px;*/
+				border-bottom: 1px solid #666;			
+				line-height: 40px;
+				overflow: hidden;
+			}
+			#ul1 a{
+				float: right;
+			}
+			li{
+				transition: all 1s ease; 	
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="top">
+			标题:<input type="text" name="" id="txtTitle" value="" />
+			内容:<textarea name="" rows="" cols="" id="txtContent"></textarea>
+			<input type="button" name="btn" id="btn" value="提交" />
+			</div>
+			<h3>显示留言</h3>
+			<ul id="ul1">
+				<!--<li>
+					<p class="p1">张三</p><p class="p2">真逗啊<a href="###">删除</a></p>
+				</li>-->
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//获取标题元素
+		var title = document.querySelector("#txtTitle");
+		//获取内容元素
+		var content = document.querySelector("#txtContent");
+		//获取提交按钮
+		var btn = document.querySelector("#btn");
+		//获取UL
+		var uls = document.querySelector("#ul1");
+		//给按钮添加点击事件
+		btn.onclick = function(){
+			//当点击按钮时，判断标题和内容是否都不为空，如果有一个为空，提示不能为空
+			if(title.value == "" ||  content.value == ""){
+				alert("标题或内容不能为空");
+				//跳出包裹它函数
+				return;
+			}
+			//创建li
+			var li = document.createElement("li");
+			//给li设置内容
+			li.innerHTML = '<p class="p1">'+title.value+'</p><p class="p2">'+content.value+'<a href="###">删除</a></p>';
+			//添加li到ul里面，倒序插入
+			uls.insertBefore(li,uls.firstElementChild);
+			
+			//清除标题和内容元素里面的文字
+			title.value = "";
+			content.value = "";
+			
+			//获取a标签，并添加点击事件
+			var aBtn = document.querySelector("a");
+			aBtn.onclick = function(){
+				//删除li
+				uls.removeChild(this.parentNode.parentNode);
+			}
+		}
+		
+		
+		
+		
+		
+		
+	</script>
+	</html>

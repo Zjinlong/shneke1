@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+     .a1{
+         background: red
+     }
+    
+    
+    </style>
+</head>
+
+<body>
+    <div id='root'>
+        <!-- 路由导航 -->
+        <div>
+            <router-link to="/home">主页</router-link>
+            <router-link to="/list">列表页</router-link>
+        </div>
+        <!-- 路由出口 -->
+        <router-view></router-view>
+
+    </div>
+
+
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+        //定义路由组件 
+        //  var home = {template:"<p>我是首页</p>"}
+        //  var list = {template:"<p>我是列表页</p>"}
+
+
+
+        // //定义路由
+        //  const routes = [
+        //   {path:"/home",component:home},
+        //   {path:"/list",component:list}
+        //  ] 
+
+
+        //生成vue-router实例 传入路由配置  
+        const vueRoute = new VueRouter({
+            // routes:routes
+            //缩写
+            routes: [
+                // 默认路由
+                {
+                    path: "/",
+                    component: {
+                        template: "<div>不是这样写的吧？都不能加样式</div>"
+                    }
+                }, {
+                    path: "/home",
+                    component: {
+                        template: "<div>不是这样写的吧？都不能加样式</div>"
+                    }
+                }, {
+                    path: "/list",
+                    component: {
+                        template: "<div><span>是</span><input></div>" 
+                    }
+                }
+            ]
+
+        })
+
+
+
+        const vm = new Vue({
+            //router  挂载路由
+            router: vueRoute,
+            // router,
+            el: "#root",
+            data: {
+
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
